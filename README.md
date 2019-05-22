@@ -2,7 +2,7 @@ FAKindex Documentation
 ===
 
 ```text
-- - - RUSSIAN BELOW - - -
+- - - RUSSIAN BELOW  /  НА РУССКОМ НИЖЕ - - -
 ```
 
 # About
