@@ -14,8 +14,9 @@ from sqlalchemy.orm import relationship, scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 import settings
+import passwords
 
-engine = create_engine("sqlite:///FAK.db", echo=True)
+engine = create_engine('mysql://' + passwords.user + ':' + passwords.password + '@' + passwords.host + '/' + passwords.db + '?charset=utf8mb4', echo=True)
 
 db_session = scoped_session(sessionmaker(bind=engine))
 
