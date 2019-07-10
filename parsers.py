@@ -616,7 +616,7 @@ time.sleep(25)
 stolichki_parser_to_db()
 time.sleep(25)
 wer_parser_to_db()
-#time.sleep(25)
+time.sleep(25)
 
 
 
