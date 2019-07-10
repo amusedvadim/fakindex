@@ -539,10 +539,21 @@ def wer_parser_to_db():
                     price = price[0] + '.00'
 
                 except:
-                    price = soup.find(attrs={"class": "product-newprice product-price price"})
-                    price = price.text
-                    price = re.findall('(\d+)', price)
-                    price = price[0] + '.00'
+
+                    try:
+                        price = soup.find(attrs={"class": "product-newprice product-price"})
+                        price = price.text
+                        price = re.findall('(\d+)', price)
+                        price = price[0] + '.00'
+
+                    except:
+                        price = soup.find(attrs={"class": "product-newprice product-price price"})
+                        price = price.text
+                        price = re.findall('(\d+)', price)
+                        price = price[0] + '.00'
+
+                    else:
+                        pass
 
                 else:
                     pass
