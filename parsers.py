@@ -6,7 +6,7 @@ import ssl
 from datetime import datetime
 import time
 import re
-import settings
+import random
 
 from models import db_session, Drugs, Stores, URLs, Prices
 
@@ -29,8 +29,10 @@ def samsonpharma_parser_to_db():
             soup = BeautifulSoup(response, "html.parser")
 
             try:
-                prices_all = soup.findAll(attrs={"itemprop": "price"})
+                prices_all = soup.findAll(attrs={"class": "product__price-value"})
                 price = prices_all[0].text
+                price = re.findall('(\d+)', price)
+                price = price[0] + '.00'
 
             except:
                 price = "0.00"
@@ -43,23 +45,14 @@ def samsonpharma_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -99,24 +92,14 @@ def neopharm_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
-
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -154,23 +137,14 @@ def asna_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -208,23 +182,14 @@ def apteka366_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -271,23 +236,14 @@ def aptekaru_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -295,7 +251,8 @@ def aptekaru_parser_to_db():
         to_db = Prices(date, drug, store, price)
         db_session.add(to_db)
 
-        time.sleep(15)
+        #time.sleep(15)
+        time.sleep(random.randint(21, 38))
 
     db_session.commit()
 
@@ -326,23 +283,14 @@ def rigla_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -380,23 +328,14 @@ def gorzdrav_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -436,23 +375,14 @@ def stoletov_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -491,23 +421,14 @@ def stolichki_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -569,23 +490,14 @@ def wer_parser_to_db():
         except TimeoutError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.URLError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         except urllib.error.HTTPError:
 
             price = '0.00'
-            print(settings.err)
-            print(url)
-            print(settings.err)
 
         drug = Drugs.query.filter(Drugs.id == url.drug_id).first()
         store = Stores.query.filter(Stores.id == url.store_id).first()
@@ -616,9 +528,3 @@ time.sleep(25)
 stolichki_parser_to_db()
 time.sleep(25)
 wer_parser_to_db()
-time.sleep(25)
-
-
-
-
-
